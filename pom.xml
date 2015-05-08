@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>nl.hsac</groupId>
+	<artifactId>hsac-xebium-bridge</artifactId>
+	<version>0.1-SNAPSHOT</version>
+	<url>https://github.com/fhoeben/hsac-xebium-bridge</url>
+	<name>Bridge between HSAC's FitNesse Fixtures and Xebia's Xebium</name>
+	<description>Fixtures to assist in testing via FitNesse</description>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Fried Hoeben</name>
+			<email>fitnesse@hsac.nl</email>
+			<organization>Hoeben Software Architecture Consulting B.V.</organization>
+			<organizationUrl>https://nl.linkedin.com/in/friedhoeben</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/fhoeben/hsac-xebium-bridge.git</connection>
+		<url>https://github.com/fhoeben/hsac-xebium-bridge.git</url>
+		<developerConnection>scm:git:git://github.com/fhoeben/hsac-xebium-bridge.git</developerConnection>
+	</scm>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<selenium.version>2.45.0</selenium.version>
+		<xebium.version>0.12</xebium.version>
+		<hsac.version>1.10-SNAPSHOT</hsac.version>
+
+		<fitnesse.version>20150424</fitnesse.version>
+		<fitnesse.port>9091</fitnesse.port>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.fitnesse</groupId>
+			<artifactId>fitnesse</artifactId>
+			<version>${fitnesse.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>nl.hsac</groupId>
+			<artifactId>hsac-fitnesse-fixtures</artifactId>
+			<version>${hsac.version}</version>
+		</dependency>
+
+		<!-- For Xebium -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-remote-driver</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xebia.incubator</groupId>
+			<artifactId>xebium</artifactId>
+			<version>${xebium.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-lang</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.github.detro.ghostdriver</groupId>
+					<artifactId>phantomjsdriver</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-server</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-remote-driver</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.opera</groupId>
+					<artifactId>operadriver</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.fitnesse.plugins</groupId>
+					<artifactId>maven-classpath-plugin</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- Testing -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
