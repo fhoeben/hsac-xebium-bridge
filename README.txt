@@ -12,7 +12,7 @@ Features:
 - HsacSeleniumDriverFixture also supports taking of screenshots (so can be used in 'storyboard' tables, and supports |show|take screenshot|myPage|).
 - On any exception thrown by HsacSeleniumDriverFixture an attempt is made to include an screenshot.
 - When 'isOn' returns 'Execution of command failed' this is transformed to an exception containing a screenshot.
-- 'doOn' and 'doOnWith' with a target based on id or xPath now first wait (for at most the specified timeout) until that target is visible, and will throw an exception when it is not.
+- 'doOn' and 'doOnWith' with a target based on id, css or xPath now first wait (for at most the specified timeout) until that target is visible, and will throw an exception when it is not.
 - 'click' and 'clickAndWait' selecting using xPath will use BrowserTest's click, which ensures the element is visible (possibly first scrolling it into view).
 - 'waitForVisible' (with an xPath target) throws an exception containing screenshot if the element is not visible after the maximum timeout.
 

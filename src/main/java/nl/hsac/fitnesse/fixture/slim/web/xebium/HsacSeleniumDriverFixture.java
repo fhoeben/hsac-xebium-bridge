@@ -115,6 +115,8 @@ public class HsacSeleniumDriverFixture extends com.xebia.incubator.xebium.Seleni
             getBrowserTest().waitForXPathVisible(target);
         } else if (target.startsWith("id=")) {
             getBrowserTest().waitForVisible(By.id(target.substring(3)));
+        } else if (target.startsWith("css=")) {
+            getBrowserTest().waitForVisible(By.cssSelector(target.substring(4)));
         }
     }
 
