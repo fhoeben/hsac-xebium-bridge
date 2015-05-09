@@ -42,17 +42,8 @@
 		<selenium.version>2.45.0</selenium.version>
 		<xebium.version>0.12</xebium.version>
 		<hsac.version>1.10-SNAPSHOT</hsac.version>
-
-		<fitnesse.version>20150424</fitnesse.version>
-		<fitnesse.port>9091</fitnesse.port>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.fitnesse</groupId>
-			<artifactId>fitnesse</artifactId>
-			<version>${fitnesse.version}</version>
-		</dependency>
-
 		<dependency>
 			<groupId>nl.hsac</groupId>
 			<artifactId>hsac-fitnesse-fixtures</artifactId>
