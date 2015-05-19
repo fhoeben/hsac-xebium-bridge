@@ -118,6 +118,47 @@
 					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
+			<plugin>
+				<!-- Use dependency:copy-dependencies to copy all jar from dependencies to wiki/fixtures,
+					where they will be picked up by the assembly plugin to create a zipfile that can be added
+					to a hsac-fitnesse-fixtures standalone installation.
+				-->
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<includes>**/*</includes>
+					<excludes>META-INF,META-INF/**</excludes>
+					<includeScope>compile</includeScope>
+					<excludeArtifactIds>fitnesse,junit,hsac-fitnesse-fixtures</excludeArtifactIds>
+					<excludeTransitive>true</excludeTransitive>
+					<outputDirectory>target/fixtures</outputDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src/assembly/standalone.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
