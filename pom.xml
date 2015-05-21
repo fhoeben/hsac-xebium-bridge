@@ -142,7 +142,6 @@
 					<excludes>META-INF,META-INF/**</excludes>
 					<includeScope>runtime</includeScope>
 					<excludeArtifactIds>fitnesse,junit,hsac-fitnesse-fixtures</excludeArtifactIds>
-					<excludeTransitive>true</excludeTransitive>
 					<outputDirectory>target/fixtures</outputDirectory>
 				</configuration>
 				<executions>
