@@ -6,7 +6,7 @@
 
 	<groupId>nl.hsac</groupId>
 	<artifactId>hsac-xebium-bridge</artifactId>
-	<version>0.1.1</version>
+	<version>0.1-SNAPSHOT</version>
 	<url>https://github.com/fhoeben/hsac-xebium-bridge</url>
 	<name>Bridge between HSAC's FitNesse Fixtures and Xebia's Xebium</name>
 	<description>Fixtures to assist in testing via FitNesse</description>
@@ -41,7 +41,7 @@
 
 		<selenium.version>2.45.0</selenium.version>
 		<xebium.version>0.12</xebium.version>
-		<hsac.version>1.10.7</hsac.version>
+		<hsac.version>1.10-SNAPSHOT</hsac.version>
 	</properties>
 	<dependencies>
 		<dependency>
