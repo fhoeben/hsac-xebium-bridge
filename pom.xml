@@ -49,11 +49,23 @@
 			<artifactId>hsac-fitnesse-fixtures</artifactId>
 			<version>${hsac.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.fitnesse</groupId>
+			<artifactId>fitnesse</artifactId>
+			<version>20150424</version>
+			<scope>provided</scope>
+		</dependency>
+
 
 		<!-- For Xebium -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-remote-driver</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-htmlunit-driver</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
 		<dependency>
@@ -128,7 +140,7 @@
 				<configuration>
 					<includes>**/*</includes>
 					<excludes>META-INF,META-INF/**</excludes>
-					<includeScope>compile</includeScope>
+					<includeScope>runtime</includeScope>
 					<excludeArtifactIds>fitnesse,junit,hsac-fitnesse-fixtures</excludeArtifactIds>
 					<excludeTransitive>true</excludeTransitive>
 					<outputDirectory>target/fixtures</outputDirectory>
