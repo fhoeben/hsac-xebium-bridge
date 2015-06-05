@@ -37,10 +37,10 @@ public class HsacSeleniumDriverFixture extends com.xebia.incubator.xebium.Seleni
 
     @Override
     public void startBrowserOnUrl(String browser, String browserUrl) {
+        cleanBrowserOnUrl(browserUrl);
         // we use the driver configured in SuiteSetUp
         WebDriver driver = environment.getSeleniumHelper().driver();
         this.startDriverOnUrl(driver, browserUrl);
-        cleanBrowserOnUrl(browserUrl);
     }
 
     @Deprecated
