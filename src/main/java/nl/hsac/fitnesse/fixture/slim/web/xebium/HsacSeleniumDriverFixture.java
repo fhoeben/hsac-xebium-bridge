@@ -3,10 +3,12 @@ package nl.hsac.fitnesse.fixture.slim.web.xebium;
 import fitnesse.slim.fixtureInteraction.FixtureInteraction;
 import nl.hsac.fitnesse.fixture.Environment;
 import nl.hsac.fitnesse.fixture.slim.SlimFixtureException;
+import nl.hsac.fitnesse.fixture.util.SeleniumHelper;
 import nl.hsac.fitnesse.slim.interaction.ExceptionHelper;
 import nl.hsac.fitnesse.slim.interaction.InteractionAwareFixture;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +28,7 @@ public class HsacSeleniumDriverFixture extends com.xebia.incubator.xebium.Seleni
 
     public HsacSeleniumDriverFixture(HsacXebiumBrowserTest browserTest) {
         this.browserTest = browserTest;
-        setTimeoutToSeconds(environment.getSeleniumHelper().getDefaultTimeoutSeconds());
+        setTimeoutToSeconds(getSeleniumHelper().getDefaultTimeoutSeconds());
         try {
             String baseDir = environment.getFitNesseRootDir() + "/files/screenshots/xebium/";
             saveScreenshotAfterInFolder("assertion", baseDir.replace("/", File.separator));
@@ -39,7 +41,7 @@ public class HsacSeleniumDriverFixture extends com.xebia.incubator.xebium.Seleni
     public void startBrowserOnUrl(String browser, String browserUrl) {
         cleanBrowserOnUrl(browserUrl);
         // we use the driver configured in SuiteSetUp
-        WebDriver driver = environment.getSeleniumHelper().driver();
+        WebDriver driver = getSeleniumHelper().driver();
         this.startDriverOnUrl(driver, browserUrl);
     }
 
@@ -86,12 +88,12 @@ public class HsacSeleniumDriverFixture extends com.xebia.incubator.xebium.Seleni
     @Override
     public boolean doOn(String command, String target) {
         boolean result;
-        if ("waitForVisible".equals(command) && !target.startsWith("css=")) {
-            result = getBrowserTest().waitForXPathVisible(target);
-        } else if ("click".equals(command) && !target.startsWith("css=")) {
-            result = getBrowserTest().clickByXPath(target);
-        } else if ("clickAndWait".equals(command) && !target.startsWith("css=")) {
-            result = getBrowserTest().clickByXPath(target);
+        if ("waitForVisible".equals(command)) {
+            result = ensureTargetVisible(target);
+        } else if ("click".equals(command) || "clickAndWait".equals(command)) {
+            By by = targetToBy(target);
+            WebElement element = getSeleniumHelper().findElement(by);
+            return getBrowserTest().clickElement(element);
         } else {
             if (!command.contains("Not")) {
                 ensureTargetVisible(target);
@@ -109,15 +111,28 @@ public class HsacSeleniumDriverFixture extends com.xebia.incubator.xebium.Seleni
         return super.doOnWith(command, target, value);
     }
 
-    protected void ensureTargetVisible(String target) {
+    protected boolean ensureTargetVisible(String target) {
         // we can not act on elements that are not visible
+        By by = targetToBy(target);
+        return getBrowserTest().waitForVisible(by);
+    }
+
+    protected By targetToBy(String target) {
+        By result;
         if (target.startsWith("/")) {
-            getBrowserTest().waitForXPathVisible(target);
+            result = By.xpath(target);
         } else if (target.startsWith("id=")) {
-            getBrowserTest().waitForVisible(By.id(target.substring(3)));
+            result = By.id(target.substring(3));
         } else if (target.startsWith("css=")) {
-            getBrowserTest().waitForVisible(By.cssSelector(target.substring(4)));
+            result = By.cssSelector(target.substring(4));
+        } else if (target.startsWith("name=")) {
+            result = By.name(target.substring(5));
+        } else if (target.startsWith("xpath=")) {
+            result = By.xpath(target.substring(6));
+        } else {
+            throw new SlimFixtureException(false, "Unable to convert target to Selenium By: " + target);
         }
+        return result;
     }
 
     @Override
@@ -136,6 +151,10 @@ public class HsacSeleniumDriverFixture extends com.xebia.incubator.xebium.Seleni
         }
 
         return result;
+    }
+
+    protected SeleniumHelper getSeleniumHelper() {
+        return environment.getSeleniumHelper();
     }
 
     public HsacXebiumBrowserTest getBrowserTest() {
