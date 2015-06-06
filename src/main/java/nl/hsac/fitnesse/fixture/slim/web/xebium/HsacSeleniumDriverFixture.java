@@ -90,7 +90,8 @@ public class HsacSeleniumDriverFixture extends com.xebia.incubator.xebium.Seleni
         boolean result;
         if ("waitForVisible".equals(command)) {
             result = ensureTargetVisible(target);
-        } else if ("click".equals(command) || "clickAndWait".equals(command)) {
+        } else if ("click".equals(command)
+                    || "clickAndWait".equals(command)) {
             By by = targetToBy(target);
             WebElement element = getSeleniumHelper().findElement(by);
             return getBrowserTest().clickElement(element);
