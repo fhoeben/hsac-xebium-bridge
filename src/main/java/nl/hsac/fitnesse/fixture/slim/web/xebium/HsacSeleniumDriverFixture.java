@@ -106,8 +106,12 @@ public class HsacSeleniumDriverFixture extends com.xebia.incubator.xebium.Seleni
 
     @Override
     public boolean doOnWith(String command, String target, String value) {
-        if (!command.contains("Not")) {
-            ensureTargetVisible(target);
+        if (!"verifyTextPresent".equals(command) && !command.contains("Not")) {
+            try {
+                ensureTargetVisible(target);
+            } catch (UnrecognizedXebiumTarget e) {
+                // ignore and just try to use super's behavior
+            }
         }
         return super.doOnWith(command, target, value);
     }
@@ -131,7 +135,7 @@ public class HsacSeleniumDriverFixture extends com.xebia.incubator.xebium.Seleni
         } else if (target.startsWith("xpath=")) {
             result = By.xpath(target.substring(6));
         } else {
-            throw new SlimFixtureException(false, "Unable to convert target to Selenium By: " + target);
+            throw new UnrecognizedXebiumTarget("Unable to convert target to Selenium By: " + target);
         }
         return result;
     }
