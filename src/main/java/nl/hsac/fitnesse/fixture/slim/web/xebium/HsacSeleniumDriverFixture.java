@@ -29,9 +29,7 @@ public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
             WebElement element = getSeleniumHelper().findElement(by);
             return getBrowserTest().clickElement(element);
         } else {
-            if (!command.contains("Not")) {
-                ensureTargetVisible(target);
-            }
+            ensureReadyForDo(command, target);
             result = super.doOn(command, target);
         }
         return result;
@@ -39,6 +37,11 @@ public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
 
     @Override
     public boolean doOnWith(String command, String target, String value) {
+        ensureReadyForDo(command, target);
+        return super.doOnWith(command, target, value);
+    }
+
+    protected void ensureReadyForDo(String command, String target) {
         if (!"verifyTextPresent".equals(command) && !command.contains("Not")) {
             try {
                 ensureTargetVisible(target);
@@ -46,7 +49,6 @@ public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
                 // ignore and just try to use super's behavior
             }
         }
-        return super.doOnWith(command, target, value);
     }
 
     protected boolean ensureTargetVisible(String target) {
