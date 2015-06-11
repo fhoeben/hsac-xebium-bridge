@@ -67,6 +67,8 @@ public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
             result = By.cssSelector(target.substring(4));
         } else if (target.startsWith("name=")) {
             result = By.name(target.substring(5));
+        } else if (target.startsWith("link=")) {
+            result = By.linkText(target.substring(5));
         } else if (target.startsWith("xpath=")) {
             result = By.xpath(target.substring(6));
         } else {
