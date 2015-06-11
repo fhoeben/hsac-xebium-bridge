@@ -10,10 +10,17 @@ import org.openqa.selenium.WebElement;
  */
 public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
 
+    /**
+     * Creates new.
+     */
     public HsacSeleniumDriverFixture() {
-        this(new HsacXebiumBrowserTest());
+        super();
     }
 
+    /**
+     * Creates new.
+     * @param browserTest browser test instance that will be used to use HSAC features.
+     */
     public HsacSeleniumDriverFixture(HsacXebiumBrowserTest browserTest) {
         super(browserTest);
     }

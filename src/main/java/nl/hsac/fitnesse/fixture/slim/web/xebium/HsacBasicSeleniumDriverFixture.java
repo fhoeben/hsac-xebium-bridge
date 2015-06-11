@@ -25,6 +25,13 @@ public class HsacBasicSeleniumDriverFixture extends com.xebia.incubator.xebium.S
 
     /**
      * Creates new.
+     */
+    public HsacBasicSeleniumDriverFixture() {
+        this(new HsacXebiumBrowserTest());
+    }
+
+    /**
+     * Creates new.
      * @param browserTest browser test instance that will be used to use HSAC features.
      */
     public HsacBasicSeleniumDriverFixture(HsacXebiumBrowserTest browserTest) {
