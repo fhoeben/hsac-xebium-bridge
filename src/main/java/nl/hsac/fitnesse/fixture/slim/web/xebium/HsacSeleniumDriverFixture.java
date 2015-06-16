@@ -58,7 +58,6 @@ public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
     }
 
     protected void ensureReadyForDo(String command, String target) {
-        target = unalias(target);
         if (!"verifyTextPresent".equals(command)
                 && !"open".equals(command)
                 && !"openAndWait".equals(command)
@@ -72,14 +71,12 @@ public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
     }
 
     protected boolean ensureTargetVisible(String target) {
-        target = unalias (target);
         // we can not act on elements that are not visible
         By by = targetToBy(target);
         return getBrowserTest().waitForVisible(by);
     }
 
     protected By targetToBy(String target) {
-        target = unalias (target);
         By result;
         if (target.startsWith("/")) {
             result = By.xpath(target);
@@ -128,7 +125,7 @@ public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
         aliases.clear();
     }
 
-    private String unalias(String value) {
+    protected String unalias(String value) {
         String result = value;
         if (value != null && value.startsWith(ALIAS_PREFIX)) {
             String alias = value.substring(ALIAS_PREFIX.length());
@@ -140,7 +137,7 @@ public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
         return result;
     }
 
-    private void initSpecialKeysMapping() {
+    protected void initSpecialKeysMapping() {
         aliases.put("$KEY_BACKSPACE", Keys.chord(Keys.BACK_SPACE));
         aliases.put("$KEY_TAB", Keys.chord(Keys.TAB));
         aliases.put("$KEY_ENTER", Keys.chord(Keys.ENTER));
