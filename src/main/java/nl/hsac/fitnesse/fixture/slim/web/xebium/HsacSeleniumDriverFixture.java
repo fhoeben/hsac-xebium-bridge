@@ -114,13 +114,16 @@ public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
         return result;
     }
 
+    // the alias mechanism in Xebium is not accessible to subclasses so it is duplicated here
     private static final String ALIAS_PREFIX = "%";
     private Map<String, String> aliases = new HashMap<String, String>();
 
+    @Override
     public void addAliasForLocator(String alias, String locator) {
         aliases.put(alias, locator);
     }
 
+    @Override
     public void clearAliases() {
         aliases.clear();
     }
