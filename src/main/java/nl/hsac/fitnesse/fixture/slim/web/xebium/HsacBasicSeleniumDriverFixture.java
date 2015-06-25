@@ -13,6 +13,7 @@ import nl.hsac.fitnesse.slim.interaction.InteractionAwareFixture;
 import org.openqa.selenium.WebDriver;
 
 import fitnesse.slim.fixtureInteraction.FixtureInteraction;
+import org.openqa.selenium.WebDriverException;
 
 /**
  * Our subclass of Xebium to allow combination with HSAC fixtures and support the 'storyboard' Slim table.
@@ -50,7 +51,11 @@ public class HsacBasicSeleniumDriverFixture extends com.xebia.incubator.xebium.S
         cleanBrowserOnUrl(browserUrl);
         // we use the driver configured in SuiteSetUp
         WebDriver driver = getSeleniumHelper().driver();
-        startDriverOnUrl(driver, browserUrl);
+        try {
+            startDriverOnUrl(driver, browserUrl);
+        } catch (WebDriverException e) {
+            handlePossibleSafariSetTimeoutIssue(e);
+        }
     }
 
     @Deprecated
@@ -81,7 +86,20 @@ public class HsacBasicSeleniumDriverFixture extends com.xebia.incubator.xebium.S
     @Override
     public void setTimeoutTo(long timeout) {
         getBrowserTest().secondsBeforeTimeout((int) (timeout / 1000));
-        super.setTimeoutTo(timeout);
+        try {
+            super.setTimeoutTo(timeout);
+        } catch (WebDriverException e) {
+            handlePossibleSafariSetTimeoutIssue(e);
+        }
+    }
+
+    protected void handlePossibleSafariSetTimeoutIssue(WebDriverException e) {
+        String msg = e.getMessage();
+        if (msg != null && msg.contains("Unknown command: setTimeout")) {
+            // ignore issue in Safari
+        } else {
+            throw e;
+        }
     }
 
     /*
