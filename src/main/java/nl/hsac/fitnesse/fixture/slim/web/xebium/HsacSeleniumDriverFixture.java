@@ -2,9 +2,6 @@ package nl.hsac.fitnesse.fixture.slim.web.xebium;
 
 import nl.hsac.fitnesse.fixture.slim.SlimFixtureException;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
 import org.openqa.selenium.Keys;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,9 +36,8 @@ public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
             result = ensureTargetVisible(target);
         } else if ("click".equals(command)
                     || "clickAndWait".equals(command)) {
-            By by = targetToBy(target);
-            WebElement element = getSeleniumHelper().findElement(by);
-            return getBrowserTest().clickElement(element);
+            target = xebiumTargetToBrowserTestPlace(target);
+            return getBrowserTest().click(target);
         } else {
             ensureReadyForDo(command, target);
             result = super.doOn(command, target);
@@ -62,38 +58,20 @@ public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
                 && !"open".equals(command)
                 && !"openAndWait".equals(command)
                 && !command.contains("Not")) {
-            try {
-                ensureTargetVisible(target);
-            } catch (UnrecognizedXebiumTarget e) {
-                // ignore and just try to use super's behavior
-            }
+            ensureTargetVisible(target);
         }
     }
 
     protected boolean ensureTargetVisible(String target) {
-        // we can not act on elements that are not visible
-        By by = targetToBy(target);
-        return getBrowserTest().waitForVisible(by);
+        target = xebiumTargetToBrowserTestPlace(target);
+        return getBrowserTest().waitForVisible(target);
     }
 
-    protected By targetToBy(String target) {
-        By result;
+    protected String xebiumTargetToBrowserTestPlace(String target) {
         if (target.startsWith("/")) {
-            result = By.xpath(target);
-        } else if (target.startsWith("id=")) {
-            result = By.id(target.substring(3));
-        } else if (target.startsWith("css=")) {
-            result = By.cssSelector(target.substring(4));
-        } else if (target.startsWith("name=")) {
-            result = By.name(target.substring(5));
-        } else if (target.startsWith("link=")) {
-            result = By.linkText(target.substring(5));
-        } else if (target.startsWith("xpath=")) {
-            result = By.xpath(target.substring(6));
-        } else {
-            throw new UnrecognizedXebiumTarget("Unable to convert target to Selenium By: " + target);
+            target = "xpath=" + target;
         }
-        return result;
+        return target;
     }
 
     @Override
