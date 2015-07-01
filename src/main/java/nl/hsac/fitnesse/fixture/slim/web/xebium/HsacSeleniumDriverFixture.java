@@ -55,6 +55,7 @@ public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
 
     protected void ensureReadyForDo(String command, String target) {
         if (!"verifyTextPresent".equals(command)
+                && !"verifyLocation".equals(command)
                 && !"open".equals(command)
                 && !"openAndWait".equals(command)
                 && !command.contains("Not")) {
