@@ -41,7 +41,7 @@
 
 		<selenium.version>2.45.0</selenium.version>
 		<xebium.version>0.12</xebium.version>
-		<hsac.version>2.0-SNAPSHOT</hsac.version>
+		<hsac.version>2.0.0b</hsac.version>
 	</properties>
 	<dependencies>
 		<dependency>
