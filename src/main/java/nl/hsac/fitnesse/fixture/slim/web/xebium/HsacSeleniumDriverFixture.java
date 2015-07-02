@@ -58,6 +58,8 @@ public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
                 && !"verifyLocation".equals(command)
                 && !"open".equals(command)
                 && !"openAndWait".equals(command)
+                && !"assertTitle".equals(command)
+                && !"pause".equals(command)
                 && !command.contains("Not")) {
             ensureTargetVisible(target);
         }
