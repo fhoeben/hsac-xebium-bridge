@@ -21,10 +21,10 @@ public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
 
     /**
      * Creates new.
-     * @param browserTest browser test instance that will be used to use HSAC features.
+     * @param browserTestClass browser test subclass that will be used to use HSAC features.
      */
-    public HsacSeleniumDriverFixture(HsacXebiumBrowserTest browserTest) {
-        super(browserTest);
+    public HsacSeleniumDriverFixture(Class<? extends HsacXebiumBrowserTest> browserTestClass) {
+        super(browserTestClass);
         initSpecialKeysMapping();
     }
 

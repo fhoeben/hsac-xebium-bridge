@@ -8,6 +8,7 @@ import nl.hsac.fitnesse.fixture.Environment;
 import nl.hsac.fitnesse.fixture.slim.SlimFixtureException;
 import nl.hsac.fitnesse.fixture.util.SeleniumHelper;
 import nl.hsac.fitnesse.slim.interaction.ExceptionHelper;
+import nl.hsac.fitnesse.slim.interaction.FixtureFactory;
 import nl.hsac.fitnesse.slim.interaction.InteractionAwareFixture;
 
 import org.openqa.selenium.WebDriver;
@@ -21,6 +22,7 @@ import org.openqa.selenium.WebDriverException;
  * Furthermore any exceptions thrown will be processed to attempt to add a screenshot.
  */
 public class HsacBasicSeleniumDriverFixture extends com.xebia.incubator.xebium.SeleniumDriverFixture implements InteractionAwareFixture {
+    private static final FixtureFactory BROWSER_TEST_FACTORY = new FixtureFactory();
     protected final Environment environment = Environment.getInstance();
     protected final HsacXebiumBrowserTest browserTest;
 
@@ -28,15 +30,15 @@ public class HsacBasicSeleniumDriverFixture extends com.xebia.incubator.xebium.S
      * Creates new.
      */
     public HsacBasicSeleniumDriverFixture() {
-        this(new HsacXebiumBrowserTest());
+        this(HsacXebiumBrowserTest.class);
     }
 
     /**
      * Creates new.
-     * @param browserTest browser test instance that will be used to use HSAC features.
+     * @param browserTestClass browser test class that will be used to use HSAC features.
      */
-    public HsacBasicSeleniumDriverFixture(HsacXebiumBrowserTest browserTest) {
-        this.browserTest = browserTest;
+    public HsacBasicSeleniumDriverFixture(Class<? extends HsacXebiumBrowserTest> browserTestClass) {
+        this.browserTest = BROWSER_TEST_FACTORY.create(browserTestClass);
         setTimeoutToSeconds(getSeleniumHelper().getDefaultTimeoutSeconds());
         try {
             String baseDir = environment.getFitNesseRootDir() + "/files/screenshots/xebium/";
