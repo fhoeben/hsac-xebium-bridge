@@ -4,12 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
+import fitnesse.slim.fixtureInteraction.InteractionAwareFixture;
 import nl.hsac.fitnesse.fixture.Environment;
 import nl.hsac.fitnesse.fixture.slim.SlimFixtureException;
 import nl.hsac.fitnesse.fixture.util.SeleniumHelper;
 import nl.hsac.fitnesse.slim.interaction.ExceptionHelper;
 import nl.hsac.fitnesse.slim.interaction.FixtureFactory;
-import nl.hsac.fitnesse.slim.interaction.InteractionAwareFixture;
 
 import org.openqa.selenium.WebDriver;
 
