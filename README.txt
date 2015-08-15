@@ -22,4 +22,3 @@ On top of the features above HsacSeleniumDriverFixture adds:
 Please note:
 When 'startBrowserOnUrl' is invoked no new Selenium WebDriver session is created, but it opens the specified URL, after deleting the existing localStorage and cookies for that site.
 'stopBrowser' does not end the WebDriver session (that must be done, like starting it, via nl.hsac.fitnesse.fixture.slim.web.SeleniumDriverSetup), it only clears the cookies and localStorage of the current site.
-To use have screenshots be included with every exception it is important to configure the 'Slim Interaction' used (by adding '!define slim.flags {-i nl.hsac.fitnesse.slim.interaction.InterceptingInteraction}' to the root page of your Slim tests).
