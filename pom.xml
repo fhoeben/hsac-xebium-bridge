@@ -39,9 +39,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<selenium.version>2.46.0</selenium.version>
+		<selenium.version>2.47.0</selenium.version>
 		<xebium.version>0.12</xebium.version>
-		<hsac.version>2.1.0-SNAPSHOT</hsac.version>
+		<hsac.version>2.1.0</hsac.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -112,7 +112,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
