@@ -6,7 +6,7 @@
 
 	<groupId>nl.hsac</groupId>
 	<artifactId>hsac-xebium-bridge</artifactId>
-	<version>0.3.0</version>
+	<version>0.3.1-SNAPSHOT</version>
 	<url>https://github.com/fhoeben/hsac-xebium-bridge</url>
 	<name>Bridge between HSAC's FitNesse Fixtures and Xebia's Xebium</name>
 	<description>Fixtures to assist in testing via FitNesse</description>
