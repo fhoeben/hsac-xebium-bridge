@@ -1,20 +1,18 @@
 package nl.hsac.fitnesse.fixture.slim.web.xebium;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Method;
-
+import fitnesse.slim.fixtureInteraction.FixtureInteraction;
 import fitnesse.slim.fixtureInteraction.InteractionAwareFixture;
 import nl.hsac.fitnesse.fixture.Environment;
 import nl.hsac.fitnesse.fixture.slim.SlimFixtureException;
-import nl.hsac.fitnesse.fixture.util.SeleniumHelper;
+import nl.hsac.fitnesse.fixture.util.selenium.SeleniumHelper;
 import nl.hsac.fitnesse.slim.interaction.ExceptionHelper;
 import nl.hsac.fitnesse.slim.interaction.FixtureFactory;
-
 import org.openqa.selenium.WebDriver;
-
-import fitnesse.slim.fixtureInteraction.FixtureInteraction;
 import org.openqa.selenium.WebDriverException;
+
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Method;
 
 /**
  * Our subclass of Xebium to allow combination with HSAC fixtures and support the 'storyboard' Slim table.
