@@ -39,9 +39,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<selenium.version>2.48.2</selenium.version>
+		<selenium.version>2.53.1</selenium.version>
 		<xebium.version>0.12</xebium.version>
-		<hsac.version>2.5.0</hsac.version>
+		<hsac.version>2.9.2</hsac.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -52,7 +52,7 @@
 		<dependency>
 			<groupId>org.fitnesse</groupId>
 			<artifactId>fitnesse</artifactId>
-			<version>20151230</version>
+			<version>20160618</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -65,8 +65,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-htmlunit-driver</artifactId>
-			<version>${selenium.version}</version>
+			<artifactId>htmlunit-driver</artifactId>
+			<version>2.23.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.xebia.incubator</groupId>
@@ -96,6 +96,10 @@
 				<exclusion>
 					<groupId>org.seleniumhq.selenium</groupId>
 					<artifactId>selenium-remote-driver</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-htmlunit-driver</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>com.opera</groupId>
