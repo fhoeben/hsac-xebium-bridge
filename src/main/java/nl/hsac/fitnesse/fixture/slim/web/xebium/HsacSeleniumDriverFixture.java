@@ -1,15 +1,18 @@
 package nl.hsac.fitnesse.fixture.slim.web.xebium;
 
 import nl.hsac.fitnesse.fixture.slim.SlimFixtureException;
-
 import org.openqa.selenium.Keys;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Extension on basic Xebium wrapper, augmenting some of the commands.
  */
 public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
+    private static final Pattern SOURCE_PATTERN = Pattern.compile("(<a .*>).*</a>", Pattern.DOTALL);
 
     /**
      * Creates new.
@@ -79,12 +82,19 @@ public class HsacSeleniumDriverFixture extends HsacBasicSeleniumDriverFixture {
 
     @Override
     public String isOn(String command, String target) {
-        target = unalias (target);
+        target = unalias(target);
         String result = super.isOn(command, target);
         if (result != null && result.startsWith("Execution of command failed:")) {
             try {
                 String screenshotHtml = takeScreenshot("isOn");
                 String msg = String.format("<div>%s. Page content:%s</div>", result, screenshotHtml);
+                String pageSource = getBrowserTest().savePageSource();
+                Matcher linkMatcher = SOURCE_PATTERN.matcher(pageSource);
+                if (linkMatcher.matches()) {
+                    String start = linkMatcher.group(1);
+                    pageSource = start + "Page content</a>";
+                    msg = String.format("<div>%s. %s:%s</div>", result, pageSource, screenshotHtml);
+                }
                 throw new SlimFixtureException(false, msg);
             } catch (SlimFixtureException e) {
                 throw e;
