@@ -6,6 +6,9 @@ The setup for this bridge is as follows:
 Create a Selenium webdriver is set up using HSAC's SeleniumDriverSetup fixture (in a SuiteSetUp page) and
 use either nl.hsac.fitnesse.fixture.slim.web.xebium.HsacSeleniumDriverFixture or nl.hsac.fitnesse.fixture.slim.web.xebium.HsacBasicSeleniumDriverFixture instead of com.xebia.incubator.xebium.SeleniumDriverFixture (which will also (like BrowserTest) use the Selenium browser created in the SuiteSetUp).
 
+A sample project using this bridge can be found in the [xebium-bridge branch of HSAC's sample-fitnesse-project](https://github.com/fhoeben/sample-fitnesse-project/tree/xebium-bridge).
+Sample test using Xebium syntax in that project: [MyTestSuite.FrontEndTests.XebiumTest](https://raw.githubusercontent.com/fhoeben/sample-fitnesse-project/xebium-bridge/wiki/FitNesseRoot/MyTestSuite/FrontEndTests/XebiumTest.wiki).
+
 Features of HsacBasicSeleniumDriverFixture:
 - Allows a build server run to control the Selenium setup as per usual for HSAC's fixtures (see https://github.com/fhoeben/hsac-fitnesse-fixtures/wiki/3.1.-Build-Server-Selenium-Configuration).
 - Screenshots taken using Xebium's standard screenshot feature are stored in 'files/screenshots/xebium' which is included in FitNesse's results for a run by a build server (i.e. target/fitnesse-results).
