@@ -37,7 +37,7 @@ public class HsacBasicSeleniumDriverFixture extends com.xebia.incubator.xebium.S
      */
     public HsacBasicSeleniumDriverFixture(Class<? extends HsacXebiumBrowserTest> browserTestClass) {
         this.browserTest = BROWSER_TEST_FACTORY.create(browserTestClass);
-        setTimeoutToSeconds(getSeleniumHelper().getDefaultTimeoutSeconds());
+        setTimeoutToSeconds(Environment.getInstance().getSeleniumDriverManager().getDefaultTimeoutSeconds());
         try {
             String baseDir = environment.getFitNesseRootDir() + "/files/screenshots/xebium/";
             saveScreenshotAfterInFolder("assertion", baseDir.replace("/", File.separator));
