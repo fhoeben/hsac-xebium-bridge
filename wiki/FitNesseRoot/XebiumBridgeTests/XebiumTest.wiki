@@ -1,0 +1,8 @@
+---
+Help: Sample test using hsac-xebium-bridge
+---
+
+|script       |hsac selenium driver fixture                   |
+|start browser|chrome|on url    |http://example.com/login     |
+|ensure       |do    |verifyText|on|css=h1|with|Example Domain|
+|stop browser                                                 |

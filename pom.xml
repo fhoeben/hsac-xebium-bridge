@@ -39,9 +39,16 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<selenium.version>3.5.3</selenium.version>
+		<webdriver.download.skip>false</webdriver.download.skip>
+		<selenium.chromedriver.version>2.32</selenium.chromedriver.version>
+
+		<selenium.version>3.6.0</selenium.version>
 		<xebium.version>0.14</xebium.version>
-		<hsac.version>3.6.0</hsac.version>
+		<hsac.version>3.6.3-SNAPSHOT</hsac.version>
+
+		<!-- classpath that Fitnesse uses when not starting from IDE/maven -->
+		<standalone.classpath>wiki/fixtures</standalone.classpath>
+		<fitnesse.port>9090</fitnesse.port>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -133,6 +140,65 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<showDeprecation>true</showDeprecation>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<!-- On clean throw away old screenshots, pagesources and downloads stored by BrowserTest -->
+							<directory>wiki/FitNesseRoot/files/</directory>
+							<followSymlinks>false</followSymlinks>
+							<includes>
+								<include>screenshots/**</include>
+								<include>pagesources/**</include>
+								<include>downloads/**</include>
+								<include>galen-reports/**</include>
+							</includes>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.webdriverextensions</groupId>
+				<artifactId>webdriverextensions-maven-plugin</artifactId>
+				<version>3.1.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>install-drivers</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<installationDirectory>${basedir}/wiki/webdrivers</installationDirectory>
+					<drivers>
+						<driver>
+							<name>chromedriver</name>
+							<platform>windows</platform>
+							<bit>32</bit>
+							<version>${selenium.chromedriver.version}</version>
+						</driver>
+						<driver>
+							<name>chromedriver</name>
+							<platform>mac</platform>
+							<bit>64</bit>
+							<version>${selenium.chromedriver.version}</version>
+						</driver>
+						<driver>
+							<name>chromedriver</name>
+							<platform>linux</platform>
+							<bit>64</bit>
+							<version>${selenium.chromedriver.version}</version>
+						</driver>
+					</drivers>
+					<skip>${webdriver.download.skip}</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.20</version>
 			</plugin>
 			<plugin>
 				<!-- Use dependency:copy-dependencies to copy all jar from dependencies to wiki/fixtures,

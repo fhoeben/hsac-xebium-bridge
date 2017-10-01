@@ -1,0 +1,21 @@
+---
+Suite
+---
+This Suite contains the acceptance tests for the hsac-xebium-bridge
+
+!contents -R2 -g -p -f -h
+
+
+!*> Basic setup for tests with Slim
+Workaround for https://github.com/unclebob/fitnesse/issues/989
+!define slim.port {0}
+
+!define TEST_SYSTEM {slim}
+
+The classpath location when working standalone:
+!path target/classes
+!path fixtures/*.jar
+
+When developing and changing the fixtures, we will work based on the pom.xml:
+!pomFile ../pom.xml@compile
+*!
