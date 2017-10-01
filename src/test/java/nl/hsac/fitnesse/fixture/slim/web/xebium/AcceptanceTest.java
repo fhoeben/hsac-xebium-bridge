@@ -5,7 +5,7 @@ import nl.hsac.fitnesse.junit.HsacFitNesseRunner;
 import org.junit.runner.RunWith;
 
 /**
- * Test class to run HsacAcceptanceTests wiki suite.
+ * Test class to run wiki suite with this project's tests.
  */
 @RunWith(HsacFitNesseRunner.class)
 @FitNesseRunner.Suite("XebiumBridgeTests")
