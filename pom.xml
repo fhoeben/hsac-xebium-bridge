@@ -44,7 +44,7 @@
 
 		<selenium.version>3.6.0</selenium.version>
 		<xebium.version>0.14</xebium.version>
-		<hsac.version>3.6.3-SNAPSHOT</hsac.version>
+		<hsac.version>3.6.3</hsac.version>
 
 		<!-- classpath that Fitnesse uses when not starting from IDE/maven -->
 		<standalone.classpath>wiki/fixtures</standalone.classpath>
