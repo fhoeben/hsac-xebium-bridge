@@ -1,0 +1,13 @@
+---
+Help: Sample test using hsac-xebium-bridge, using script table header as for Xebiun
+---
+
+Normally a 'define alias' table would go in the suite setup, but here we do it locally.
+
+|define alias                                        |
+|selenium driver fixture|hsac selenium driver fixture|
+
+|script       |selenium driver fixture                        |
+|start browser|chrome|on url    |http://example.com/login     |
+|ensure       |do    |verifyText|on|css=h1|with|Example Domain|
+|stop browser                                                 |
